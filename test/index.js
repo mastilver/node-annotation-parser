@@ -163,3 +163,75 @@ describe('annotations with arguments', function(){
         should.deepEqual(annotations.Test4[0], ['string', 5, {a: 10}]);
     });
 });
+
+
+
+describe('function does not exist', function(){
+
+    var err;
+
+    before(function(done){
+        annotationModule.getFunctionAnnotations(mockPath, 'functionWhichDoNotExist', function(e, a){
+            err = e;
+            done();
+        });
+    });
+
+    it('should return an error', function(){
+        err.should.not.be.null;
+    });
+});
+
+describe('all annotations', function(){
+
+    var err;
+    var annotations;
+    var nbFunc;
+
+    before(function(done){
+        annotationModule.getAllAnnotations(mockPath, function(e, a){
+            err = e;
+            annotations = a;
+            done();
+        });
+
+        nbFunc = 0;
+    });
+
+    it('should have gone well', function(){
+        should.ifError(err);
+    });
+
+    it('should get module annotations', function(done){
+        annotations.should.have.property('module');
+
+        annotationModule.getModuleAnnotations(mockPath, function(err, a){
+            should.deepEqual(annotations.module, a);
+            done();
+        });
+    });
+
+    it('should get functions', function(){
+        annotations.should.have.property('functions');
+
+        for(var i in annotations.functions){
+            (function(name, value){
+
+                describe(name, function(){
+                    it('should get function ' + name, function(done){
+                        annotationModule.getFunctionAnnotations(mockPath, name, function(e, a){
+                            should.deepEqual(value, a);
+                            nbFunc++;
+                            done();
+                        });
+                    });
+                });
+
+            })(i, annotations.functions[i]);
+        }
+
+        after(function(){
+            nbFunc.should.be.equal(5);
+        });
+    });
+});

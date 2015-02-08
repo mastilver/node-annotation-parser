@@ -46,6 +46,27 @@ You can then simply retrieve those annotations by doing so:
 
 var parser = require('annotation-parser');
 
+parser.getAllAnnotations('controller.js', function(err, annotations){
+    console.log(annotations);
+
+    /*
+        {
+            module: {
+                routePrefix: [
+                    ['api'],
+                ],
+            },
+            functions: [
+                index: {
+                    route: [
+                        ['collection/{id}', 'GET']
+                    ],
+                }
+            ]
+        }
+    */
+})
+
 parser.getModuleAnnotations('controller.js', function(err, annotations){
     console.log(annotations);
 
