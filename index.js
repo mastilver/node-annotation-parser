@@ -1,11 +1,12 @@
 var fs = require('fs');
+var path = require('path');
 
 
 /*   public functions   */
 
-function getModuleAnnotations(path, callback){
+function getModuleAnnotations(filePath, callback){
 
-        getFile(path, function(err, fileContent){
+        getFile(filePath, function(err, fileContent){
 
             if(err) return callback(err);
 
@@ -17,9 +18,9 @@ function getModuleAnnotations(path, callback){
         });
 }
 
-function getFunctionAnnotations(path, functionName, callback){
+function getFunctionAnnotations(filePath, functionName, callback){
 
-    getFile(path, function(err, fileContent){
+    getFile(filePath, function(err, fileContent){
 
         if(err) return callback(err);
 
@@ -31,9 +32,9 @@ function getFunctionAnnotations(path, functionName, callback){
     });
 }
 
-function getAllAnnotations(path, callback){
+function getAllAnnotations(filePath, callback){
 
-    getFile(path, function(err, fileContent){
+    getFile(filePath, function(err, fileContent){
 
         if(err) return callback(err);
 
@@ -44,10 +45,10 @@ function getAllAnnotations(path, callback){
 
         result.module = getAnnotation(fileContent, 'module');
 
-        var module = require(path);
+        var moduleToLoad = require(path.join(process.cwd(), filePath));
 
-        for(var name in module){
-            if( module[name] instanceof Function){
+        for(var name in moduleToLoad){
+            if( moduleToLoad[name] instanceof Function){
 
                 var r = getAnnotation(fileContent, 'function', name);
 
@@ -64,8 +65,8 @@ function getAllAnnotations(path, callback){
 
 /*   private functions   */
 
-function getFile(path, callback){
-    fs.readFile(path, {encoding: 'utf-8'}, callback);
+function getFile(filePath, callback){
+    fs.readFile(filePath, {encoding: 'utf-8'}, callback);
 }
 
 function getAnnotation(fileContent, type, name){
