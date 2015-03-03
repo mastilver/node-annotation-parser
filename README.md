@@ -1,4 +1,4 @@
-# node-annotation-parser [![Build Status](https://travis-ci.org/mastilver/node-annotation-parser.svg?branch=master)](https://travis-ci.org/mastilver/node-annotation-parser)
+# node-annotation-parser [![Build Status](https://travis-ci.org/mastilver/node-annotation-parser.svg?branch=master)](https://travis-ci.org/mastilver/node-annotation-parser) [![Coverage Status](https://coveralls.io/repos/mastilver/node-annotation-parser/badge.svg)](https://coveralls.io/r/mastilver/node-annotation-parser)
 
 ### Presentation
 
