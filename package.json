@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/mastilver/node-annotation-parser",
   "devDependencies": {
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.6",
     "mocha": "^2.1.0",
     "should": "^4.6.1"
   }
