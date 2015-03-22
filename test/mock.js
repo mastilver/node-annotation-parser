@@ -11,14 +11,14 @@ module.exports = {
 
     // @SingleLine()
     functionWithSingleLineAnnotation: function(){
-
+        return 'SingleLine';
     },
 
     /*
-     *  @Multiline()
+     *  @MultipleLine()
     */
     functionWithMultipleLineAnnotation: function(){
-
+        return 'MultipleLine';
     },
 
 
@@ -33,7 +33,7 @@ module.exports = {
     // @Test3();
 
     functionWithALotOfAnnotation: function(){
-
+        return 'ALot';
     },
 
     functionWithoutAnnotation: function(){
@@ -43,6 +43,6 @@ module.exports = {
     // @Test4('string', 5, {a: 10})
     //
     functionAnnotationWithArgument: function(){
-
+        return 'WithArgument';
     }
 };

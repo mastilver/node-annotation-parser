@@ -45,7 +45,7 @@ function getAllAnnotations(filePath, callback){
 
         result.module = getAnnotation(fileContent, 'module');
 
-        var moduleToLoad = require(path.join(process.cwd(), filePath));
+        var moduleToLoad = getModule(filePath);
 
         for(var name in moduleToLoad){
             if( moduleToLoad[name] instanceof Function){
@@ -67,6 +67,10 @@ function getAllAnnotations(filePath, callback){
 
 function getFile(filePath, callback){
     fs.readFile(filePath, {encoding: 'utf-8'}, callback);
+}
+
+function getModule(filePath){
+    return require(path.join(process.cwd(), filePath));
 }
 
 function getAnnotation(fileContent, type, name){

@@ -79,7 +79,7 @@ describe('multi line annotations', function(){
     });
 
     it('should get the annotation', function(){
-        annotations.should.have.property('Multiline');
+        annotations.should.have.property('MultipleLine');
     });
 });
 
