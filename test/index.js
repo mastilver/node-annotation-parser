@@ -5,233 +5,102 @@ var annotationModule = require('../index.js');
 var mockPath = './test/mock.js';
 
 
-describe('module annotations', function(){
+describe('annotations of a controllers using module.exports', function(){
 
     var err;
     var annotations;
 
     before(function(done){
-        annotationModule.getModuleAnnotations(mockPath, function(e, a){
+        annotationModule(mockPath, function(e, a){
             err = e;
-            annotations = a;
+            result = a;
 
             done();
         });
     });
 
+    describe('module', function(){
+        it('should have gone well', function(){
+            should.ifError(err);
+        });
 
-    it('should have gone well', function(){
-        should.ifError(err);
-    });
+        it('should get the first annotation', function(){
+            result.module.annotations.should.have.property('testModuleMultiline');
+        });
 
-    it('should get the first annotation', function(){
-        annotations.should.have.property('testModuleMultiline');
-    });
+        it('should get the second annotation', function(){
+            result.module.annotations.should.have.property('testModuleSingleline');
+        });
 
-    it('should get the second annotation', function(){
-        annotations.should.have.property('testModuleSingleline');
-    });
-
-    it('should not get the isolated annotation', function(){
-        annotations.should.not.have.property('Useless');
-    });
-});
-
-describe('single line annotations', function(){
-
-    var err;
-    var annotations;
-
-    before(function(done){
-        annotationModule.getFunctionAnnotations(mockPath, 'functionWithSingleLineAnnotation', function(e, a){
-            err = e;
-            annotations = a;
-
-            done();
+        it('should not get the isolated annotation', function(){
+            result.module.annotations.should.not.have.property('Useless');
         });
     });
 
-    it('should have gone well', function(){
-        should.ifError(err);
-    });
+    describe('function: functionWithSingleLineAnnotation', function(){
 
-    it('should get the annotation', function(){
-        annotations.should.have.property('SingleLine');
-    });
-});
+        it('should be set', function(){
+            result.functions.should.have.property('functionWithSingleLineAnnotation');
+        });
 
-describe('multi line annotations', function(){
-
-    var err;
-    var annotations;
-
-    before(function(done){
-        annotationModule.getFunctionAnnotations(mockPath, 'functionWithMultipleLineAnnotation', function(e, a){
-            err = e;
-            annotations = a;
-
-            done();
+        it('should get the annotation', function(){
+            result.functions.functionWithSingleLineAnnotation.annotations.should.have.property('SingleLine');
         });
     });
 
-    it('should have gone well', function(){
-        should.ifError(err);
-    });
+    describe('function: functionWithMultipleLineAnnotation', function(){
 
-    it('should get the annotation', function(){
-        annotations.should.have.property('MultipleLine');
-    });
-});
+        it('should be set', function(){
+            result.functions.should.have.property('functionWithMultipleLineAnnotation');
+        });
 
-describe('mixed type annotations', function(){
-
-    var err;
-    var annotations;
-
-    before(function(done){
-        annotationModule.getFunctionAnnotations(mockPath, 'functionWithALotOfAnnotation', function(e, a){
-            err = e;
-            annotations = a;
-
-            done();
+        it('should get the annotation', function(){
+            result.functions.functionWithMultipleLineAnnotation.annotations.should.have.property('MultipleLine');
         });
     });
 
-    it('should have gone well', function(){
-        should.ifError(err);
-    });
+    describe('function: functionWithALotOfAnnotation', function(){
 
-    it('should get the first annotation', function(){
-        annotations.should.have.property('Test1');
-    });
+        it('should be set', function(){
+            result.functions.should.have.property('functionWithALotOfAnnotation');
+        });
 
-    it('should get the second annotation', function(){
-        annotations.should.have.property('Test2');
-    });
+        it('should get the first annotation', function(){
+            result.functions.functionWithALotOfAnnotation.annotations.should.have.property('Test1');
+        });
 
-    it('should get the third annotation', function(){
-        annotations.should.have.property('Test3');
-    });
-});
+        it('should get the second annotation', function(){
+            result.functions.functionWithALotOfAnnotation.annotations.should.have.property('Test2');
+        });
 
-describe('no annotations', function(){
-
-    var err;
-    var annotations;
-
-    before(function(done){
-        annotationModule.getFunctionAnnotations(mockPath, 'functionWithoutAnnotation', function(e, a){
-            err = e;
-            annotations = a;
-
-            done();
+        it('should get the third annotation', function(){
+            result.functions.functionWithALotOfAnnotation.annotations.should.have.property('Test3');
         });
     });
 
-    it('should have gone well', function(){
-        should.ifError(err);
-    });
+    describe('function: functionWithoutAnnotation', function(){
 
-    it('should have no annotations', function(){
-        annotations.should.be.empty;
-    });
-});
+        it('should be set', function(){
+            result.functions.should.have.property('functionWithoutAnnotation');
+        });
 
-describe('annotations with arguments', function(){
-
-    var err;
-    var annotations;
-
-    before(function(done){
-        annotationModule.getFunctionAnnotations(mockPath, 'functionAnnotationWithArgument', function(e, a){
-            err = e;
-            annotations = a;
-
-            done();
+        it('should have no annotations', function(){
+            result.functions.functionWithoutAnnotation.annotations.should.be.empty;
         });
     });
 
-    it('should have gone well', function(){
-        should.ifError(err);
-    });
+    describe('function: functionAnnotationWithArgument', function(){
 
-    it('should get arguments', function(){
-        annotations.should.have.property('Test4');
-
-        annotations.Test4.should.have.length(1);
-
-        should.deepEqual(annotations.Test4[0], ['string', 5, {a: 10}]);
-    });
-});
-
-
-
-describe('function does not exist', function(){
-
-    var err;
-
-    before(function(done){
-        annotationModule.getFunctionAnnotations(mockPath, 'functionWhichDoNotExist', function(e, a){
-            err = e;
-            done();
-        });
-    });
-
-    it('should return an error', function(){
-        err.should.not.be.null;
-    });
-});
-
-describe('all annotations', function(){
-
-    var err;
-    var annotations;
-    var nbFunc;
-
-    before(function(done){
-        annotationModule.getAllAnnotations(mockPath, function(e, a){
-            err = e;
-            annotations = a;
-            done();
+        it('should be set', function(){
+            result.functions.should.have.property('functionAnnotationWithArgument');
         });
 
-        nbFunc = 0;
-    });
+        it('should get arguments', function(){
+            result.functions.functionAnnotationWithArgument.annotations.should.have.property('Test4');
 
-    it('should have gone well', function(){
-        should.ifError(err);
-    });
+            result.functions.functionAnnotationWithArgument.annotations.Test4.should.have.length(1);
 
-    it('should get module annotations', function(done){
-        annotations.should.have.property('module');
-
-        annotationModule.getModuleAnnotations(mockPath, function(err, a){
-            should.deepEqual(annotations.module, a);
-            done();
-        });
-    });
-
-    it('should get functions', function(){
-        annotations.should.have.property('functions');
-
-        for(var i in annotations.functions){
-            (function(name, value){
-
-                describe(name, function(){
-                    it('should get function ' + name, function(done){
-                        annotationModule.getFunctionAnnotations(mockPath, name, function(e, a){
-                            should.deepEqual(value, a);
-                            nbFunc++;
-                            done();
-                        });
-                    });
-                });
-
-            })(i, annotations.functions[i]);
-        }
-
-        after(function(){
-            nbFunc.should.be.equal(5);
+            should.deepEqual(result.functions.functionAnnotationWithArgument.annotations.Test4[0], ['string', 5, {a: 10}]);
         });
     });
 });

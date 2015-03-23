@@ -12,9 +12,9 @@ This module is here to help you correcting that.
 
 ### Usage
 
-`getModuleAnnotations(filePath, callback)`
+var annotationParser = require('annotation-parser');
 
-`getFunctionAnnotations(filePath, functionName, callback)`
+`annotationParser(filePath, callback)`
 
 
 ### Exemple
@@ -46,52 +46,37 @@ You can then simply retrieve those annotations by doing so:
 
 var parser = require('annotation-parser');
 
-parser.getAllAnnotations('controller.js', function(err, annotations){
+parser('controller.js', function(err, annotations){
     console.log(annotations);
 
     /*
         {
             module: {
-                routePrefix: [
-                    ['api'],
-                ],
-            },
-            functions: [
-                index: {
-                    route: [
-                        ['collection/{id}', 'GET']
+                annotations: {
+                    routePrefix: [
+                        ['api'],
                     ],
-                }
-            ]
+                },
+            },
+            functions: {
+                collection: {
+                    annotations: {
+                        route: [
+                            ['collection', 'GET']
+                        ],
+                    },
+                },
+                index: {
+                    annotations: {
+                        route: [
+                            ['collection/{id}', 'GET']
+                        ],
+                    },
+                },
+            },
         }
     */
 })
-
-parser.getModuleAnnotations('controller.js', function(err, annotations){
-    console.log(annotations);
-
-    /*
-        {
-            routePrefix: [
-                ['api'],
-            ],
-        }
-    */
-});
-
-
-parser.getFunctionAnnotations('controller.js', 'index', function(err, annotations){
-    console.log(annotations);
-
-    /*
-        {
-            route: [
-                ['collection/{id}', 'GET']
-            ],
-        }
-    */
-});
-
 
 ```
 

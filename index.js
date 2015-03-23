@@ -1,49 +1,23 @@
 var fs = require('fs');
 var path = require('path');
 
+var esprima = require('esprima');
+
 
 /*   public functions   */
 
-function getModuleAnnotations(filePath, callback){
-
-        getFile(filePath, function(err, fileContent){
-
-            if(err) return callback(err);
-
-            var result = getAnnotation(fileContent, 'module');
-
-            if(result instanceof Error) return callback(result);
-
-            callback(null, result);
-        });
-}
-
-function getFunctionAnnotations(filePath, functionName, callback){
-
-    getFile(filePath, function(err, fileContent){
-
-        if(err) return callback(err);
-
-        var result = getAnnotation(fileContent, 'function', functionName);
-
-        if(result instanceof Error) return callback(result);
-
-        callback(null, result);
-    });
-}
-
-function getAllAnnotations(filePath, callback){
+module.exports = function getAllAnnotations(filePath, callback){
 
     getFile(filePath, function(err, fileContent){
 
         if(err) return callback(err);
 
         var result = {
-            module: null,
+            module: {},
             functions: [],
         };
 
-        result.module = getAnnotation(fileContent, 'module');
+        result.module.annotations = getAnnotation(fileContent, 'module');
 
         var moduleToLoad = getModule(filePath);
 
@@ -54,13 +28,15 @@ function getAllAnnotations(filePath, callback){
 
                 if(r instanceof Error) return callback(err);
 
-                result.functions[name] = r;
+                result.functions[name] = {
+                    annotations: r,
+                };
             }
         }
 
         callback(null, result);
     });
-}
+};
 
 
 /*   private functions   */
@@ -117,11 +93,3 @@ function getAnnotation(fileContent, type, name){
 
     return result;
 }
-
-
-// module definition
-module.exports = {
-    getModuleAnnotations: getModuleAnnotations,
-    getFunctionAnnotations: getFunctionAnnotations,
-    getAllAnnotations: getAllAnnotations,
-};
