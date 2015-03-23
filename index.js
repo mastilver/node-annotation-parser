@@ -17,12 +17,15 @@ module.exports = function getAllAnnotations(filePath, callback){
             functions: [],
         };
 
-        result.module.annotations = getAnnotation(fileContent, 'module');
-
         var moduleToLoad = getModule(filePath);
 
+        result.module.annotations = getAnnotation(fileContent, 'module');
+        result.module.ref = moduleToLoad;
+
+
+
         for(var name in moduleToLoad){
-            if( moduleToLoad[name] instanceof Function){
+            if(moduleToLoad[name] instanceof Function){
 
                 var r = getAnnotation(fileContent, 'function', name);
 
@@ -30,6 +33,7 @@ module.exports = function getAllAnnotations(filePath, callback){
 
                 result.functions[name] = {
                     annotations: r,
+                    ref: moduleToLoad[name],
                 };
             }
         }

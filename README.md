@@ -12,9 +12,9 @@ This module is here to help you correcting that.
 
 ### Usage
 
-var annotationParser = require('annotation-parser');
-
-`annotationParser(filePath, callback)`
+```
+annotationParser(filePath, callback)
+```
 
 
 ### Exemple
@@ -57,6 +57,7 @@ parser('controller.js', function(err, annotations){
                         ['api'],
                     ],
                 },
+                ref: /* module reference */
             },
             functions: {
                 collection: {
@@ -65,6 +66,7 @@ parser('controller.js', function(err, annotations){
                             ['collection', 'GET']
                         ],
                     },
+                    ref: /* the collection function */
                 },
                 index: {
                     annotations: {
@@ -72,6 +74,7 @@ parser('controller.js', function(err, annotations){
                             ['collection/{id}', 'GET']
                         ],
                     },
+                    ref: /* the index function */
                 },
             },
         }

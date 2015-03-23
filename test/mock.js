@@ -37,7 +37,7 @@ module.exports = {
     },
 
     functionWithoutAnnotation: function(){
-
+        return 'Nothing';
     },
 
     // @Test4('string', 5, {a: 10})

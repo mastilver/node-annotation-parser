@@ -35,6 +35,10 @@ describe('annotations of a controllers using module.exports', function(){
         it('should not get the isolated annotation', function(){
             result.module.annotations.should.not.have.property('Useless');
         });
+
+        it('should have the module reference', function(){
+            result.module.ref.should.be.equal(require('./mock.js'));
+        });
     });
 
     describe('function: functionWithSingleLineAnnotation', function(){
@@ -46,6 +50,10 @@ describe('annotations of a controllers using module.exports', function(){
         it('should get the annotation', function(){
             result.functions.functionWithSingleLineAnnotation.annotations.should.have.property('SingleLine');
         });
+
+        it('should have the function reference', function(){
+            result.functions.functionWithSingleLineAnnotation.ref().should.be.equal('SingleLine');
+        });
     });
 
     describe('function: functionWithMultipleLineAnnotation', function(){
@@ -56,6 +64,10 @@ describe('annotations of a controllers using module.exports', function(){
 
         it('should get the annotation', function(){
             result.functions.functionWithMultipleLineAnnotation.annotations.should.have.property('MultipleLine');
+        });
+
+        it('should have the function reference', function(){
+            result.functions.functionWithMultipleLineAnnotation.ref().should.be.equal('MultipleLine');
         });
     });
 
@@ -76,6 +88,10 @@ describe('annotations of a controllers using module.exports', function(){
         it('should get the third annotation', function(){
             result.functions.functionWithALotOfAnnotation.annotations.should.have.property('Test3');
         });
+
+        it('should have the function reference', function(){
+            result.functions.functionWithALotOfAnnotation.ref().should.be.equal('ALot');
+        });
     });
 
     describe('function: functionWithoutAnnotation', function(){
@@ -86,6 +102,10 @@ describe('annotations of a controllers using module.exports', function(){
 
         it('should have no annotations', function(){
             result.functions.functionWithoutAnnotation.annotations.should.be.empty;
+        });
+
+        it('should have the function reference', function(){
+            result.functions.functionWithoutAnnotation.ref().should.be.equal('Nothing');
         });
     });
 
@@ -101,6 +121,10 @@ describe('annotations of a controllers using module.exports', function(){
             result.functions.functionAnnotationWithArgument.annotations.Test4.should.have.length(1);
 
             should.deepEqual(result.functions.functionAnnotationWithArgument.annotations.Test4[0], ['string', 5, {a: 10}]);
+        });
+
+        it('should have the function reference', function(){
+            result.functions.functionAnnotationWithArgument.ref().should.be.equal('WithArgument');
         });
     });
 });
