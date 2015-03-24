@@ -1,6 +1,6 @@
 {
   "name": "annotation-parser",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "a easy to use annotation parser",
   "main": "index.js",
   "directories": {
