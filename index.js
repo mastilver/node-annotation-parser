@@ -1,8 +1,6 @@
 var fs = require('fs');
 var path = require('path');
 
-var esprima = require('esprima');
-
 
 /*   public functions   */
 
