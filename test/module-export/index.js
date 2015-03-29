@@ -1,11 +1,11 @@
 var should = require('should');
 
-var annotationModule = require('../index.js');
+var annotationModule = require('../../index.js');
 
-var mockPath = './test/mock.js';
+var mockPath = './test/module-export/mock.js';
 
 
-describe('annotations of a controllers using module.exports', function(){
+describe('module exposing an object', function(){
 
     var err;
     var annotations;

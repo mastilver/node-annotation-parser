@@ -54,8 +54,8 @@ function getModule(filePath){
 function getAnnotation(fileContent, type, name){
 
     suffixes = ({
-        function: [name + '\\s*:\\s*function\\('],
-        module: ['module\\.exports']
+        function: [name + '\\s*:\\s*function\\(', '(module\\.)?exports\\.' + name + '\\s*=\\s*'],
+        module: ['module\\.exports\\s*=\\s*{']
     })[type];
 
     var regex = new RegExp('((\\/\\/.*)|(\\/\\*[\\S\\s]*\\*\\/)|\\s)*(' + suffixes.join('|') + ')');
@@ -63,7 +63,7 @@ function getAnnotation(fileContent, type, name){
     var matches = regex.exec(fileContent);
 
     if(matches === null){
-        return new Error('Could not find: \'' + suffixes.join('\' or \'') + '\'');
+        return {};
     }
 
     var match = matches[0];
