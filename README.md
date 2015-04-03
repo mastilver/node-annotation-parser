@@ -52,6 +52,7 @@ parser('controller.js', function(err, annotations){
     /*
         {
             module: {
+                name: 'controller',
                 annotations: {
                     routePrefix: [
                         ['api'],

@@ -19,17 +19,20 @@ describe('module exposing functions', function(){
         });
     });
 
-    describe('global result', function(){
+    describe('module', function(){
         it('should have gone well', function(){
             should.ifError(err);
-            should(result).not.be.equal(undefined);
+        });
+
+        it('should have the module name', function(){
+            result.module.name.should.be.equal('mock');
         });
     });
 
 
     describe('function: firstFunction', function(){
 
-        it('should have get the first annotation', function(){
+        it('should have the first annotation', function(){
             result.functions.firstFunction.annotations.should.have.property('first');
         });
 
@@ -40,7 +43,7 @@ describe('module exposing functions', function(){
 
     describe('function: secondFunction', function(){
 
-        it('should have get the second annotation', function(){
+        it('should have the second annotation', function(){
             result.functions.secondFunction.annotations.should.have.property('second');
         });
 

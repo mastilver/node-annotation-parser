@@ -39,6 +39,10 @@ describe('module exposing an object', function(){
         it('should have the module reference', function(){
             result.module.ref.should.be.equal(require('./mock.js'));
         });
+
+        it('should have the module name', function(){
+            result.module.name.should.be.equal('mock');
+        });
     });
 
     describe('function: functionWithSingleLineAnnotation', function(){

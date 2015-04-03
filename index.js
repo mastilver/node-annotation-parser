@@ -19,6 +19,7 @@ module.exports = function getAllAnnotations(filePath, callback){
 
         result.module.annotations = getAnnotation(fileContent, 'module');
         result.module.ref = moduleToLoad;
+        result.module.name = path.basename(filePath, path.extname(filePath));
 
 
 
