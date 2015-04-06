@@ -1,6 +1,6 @@
 {
   "name": "annotation-parser",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "a easy to use annotation parser",
   "main": "index.js",
   "directories": {
@@ -24,5 +24,8 @@
     "istanbul": "^0.3.6",
     "mocha": "^2.1.0",
     "should": "^4.6.1"
+  },
+  "dependencies": {
+    "caller": "^1.0.0"
   }
 }
