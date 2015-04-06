@@ -2,7 +2,7 @@ var should = require('should');
 
 var annotationModule = require('../../index.js');
 
-var mockPath = './test/function-export/mock.js';
+var mockPath = './mock.js';
 
 
 describe('module exposing functions', function(){

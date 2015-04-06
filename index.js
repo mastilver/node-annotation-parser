@@ -1,12 +1,16 @@
 var fs = require('fs');
 var path = require('path');
 
+var caller = require('caller');
+
 
 /*   public functions   */
 
 module.exports = function getAllAnnotations(filePath, callback){
 
-    getFile(filePath, function(err, fileContent){
+    var absolutePath = path.resolve(path.dirname(caller()), filePath);
+
+    getFile(absolutePath, function(err, fileContent){
 
         if(err) return callback(err);
 
@@ -15,7 +19,7 @@ module.exports = function getAllAnnotations(filePath, callback){
             functions: [],
         };
 
-        var moduleToLoad = getModule(filePath);
+        var moduleToLoad = require(absolutePath);
 
         result.module.annotations = getAnnotation(fileContent, 'module');
         result.module.ref = moduleToLoad;
@@ -46,10 +50,6 @@ module.exports = function getAllAnnotations(filePath, callback){
 
 function getFile(filePath, callback){
     fs.readFile(filePath, {encoding: 'utf-8'}, callback);
-}
-
-function getModule(filePath){
-    return require(path.join(process.cwd(), filePath));
 }
 
 function getAnnotation(fileContent, type, name){
