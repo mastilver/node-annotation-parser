@@ -1,8 +1,8 @@
 var should = require('should');
 
-var annotationModule = require('../../index.js');
+var annotationModule = require('../index.js');
 
-var mockPath = './mock.js';
+var mockPath = './fixtures/functionsMock.js';
 
 
 describe('module exposing functions', function(){
@@ -27,7 +27,7 @@ describe('module exposing functions', function(){
             });
 
             it('should have the module name', function(){
-                result.module.name.should.be.equal('mock');
+                result.module.name.should.be.equal('functionsMock');
             });
         });
 
@@ -78,7 +78,7 @@ describe('module exposing functions', function(){
             });
 
             it('should have the module name', function(){
-                result.module.name.should.be.equal('mock');
+                result.module.name.should.be.equal('functionsMock');
             });
         });
 
