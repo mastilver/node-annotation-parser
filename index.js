@@ -10,46 +10,57 @@ module.exports = function getAllAnnotations(filePath, callback){
 
     var absolutePath = path.resolve(path.dirname(caller()), filePath);
 
-    getFile(absolutePath, function(err, fileContent){
+    fs.readFile(absolutePath, {encoding: 'utf-8'}, function(err, fileContent){
 
         if(err) return callback(err);
 
-        var result = {
-            module: {},
-            functions: [],
-        };
-
-        var moduleToLoad = require(absolutePath);
-
-        result.module.annotations = getAnnotation(fileContent, 'module');
-        result.module.ref = moduleToLoad;
-        result.module.name = path.basename(filePath, path.extname(filePath));
-
-
-
-        for(var name in moduleToLoad){
-            if(moduleToLoad[name] instanceof Function){
-
-                var r = getAnnotation(fileContent, 'function', name);
-
-                if(r instanceof Error) return callback(err);
-
-                result.functions[name] = {
-                    annotations: r,
-                    ref: moduleToLoad[name],
-                };
-            }
-        }
+        var result = getAnnotationFromFile(absolutePath, filePath, fileContent);
 
         callback(null, result);
     });
 };
 
+module.exports.sync = function(filePath){
+    var absolutePath = path.resolve(path.dirname(caller()), filePath);
+
+    var fileContent = fs.readFileSync(absolutePath, {encoding: 'utf-8'});
+
+    return getAnnotationFromFile(absolutePath, filePath, fileContent);
+};
+
 
 /*   private functions   */
 
-function getFile(filePath, callback){
-    fs.readFile(filePath, {encoding: 'utf-8'}, callback);
+
+function getAnnotationFromFile(absolutePath, filePath, fileContent){
+    var result = {
+        module: {},
+        functions: [],
+    };
+
+    var moduleToLoad = require(absolutePath);
+
+    result.module.annotations = getAnnotation(fileContent, 'module');
+    result.module.ref = moduleToLoad;
+    result.module.name = path.basename(filePath, path.extname(filePath));
+
+
+
+    for(var name in moduleToLoad){
+        if(moduleToLoad[name] instanceof Function){
+
+            var r = getAnnotation(fileContent, 'function', name);
+
+            if(r instanceof Error) return callback(err);
+
+            result.functions[name] = {
+                annotations: r,
+                ref: moduleToLoad[name],
+            };
+        }
+    }
+
+    return result;
 }
 
 function getAnnotation(fileContent, type, name){
