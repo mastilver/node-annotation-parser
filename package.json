@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,8 @@
   "homepage": "https://github.com/mastilver/node-annotation-parser",
   "devDependencies": {
     "coveralls": "^2.11.2",
-    "istanbul": "^0.3.6",
     "mocha": "^2.1.0",
+    "nyc": "^2.2.1",
     "should": "^4.6.1"
   },
   "dependencies": {
