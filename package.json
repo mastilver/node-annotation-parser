@@ -1,13 +1,13 @@
 {
   "name": "annotation-parser",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "a easy to use annotation parser",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "nyc mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
