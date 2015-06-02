@@ -23,7 +23,7 @@ describe('module exposing an object', function(){
 
         describe('module', function(){
             it('should have gone well', function(){
-                should.ifError(err);
+                should(err).not.be.an.Error;
             });
 
             it('should get the first annotation', function(){
@@ -153,7 +153,7 @@ describe('module exposing an object', function(){
 
         describe('module', function(){
             it('should have gone well', function(){
-                should.ifError(err);
+                should(err).not.be.an.Error;
             });
 
             it('should get the first annotation', function(){

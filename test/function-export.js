@@ -23,7 +23,7 @@ describe('module exposing functions', function(){
 
         describe('module', function(){
             it('should have gone well', function(){
-                should.ifError(err);
+                should(err).not.be.an.Error;
             });
 
             it('should have the module name', function(){
@@ -74,7 +74,7 @@ describe('module exposing functions', function(){
 
         describe('module', function(){
             it('should have gone well', function(){
-                should.ifError(err);
+                should(err).not.be.an.Error;
             });
 
             it('should have the module name', function(){

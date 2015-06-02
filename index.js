@@ -49,12 +49,8 @@ function getAnnotationFromFile(absolutePath, filePath, fileContent){
     for(var name in moduleToLoad){
         if(moduleToLoad[name] instanceof Function){
 
-            var r = getAnnotation(fileContent, 'function', name);
-
-            if(r instanceof Error) return callback(err);
-
             result.functions[name] = {
-                annotations: r,
+                annotations: getAnnotation(fileContent, 'function', name),
                 ref: moduleToLoad[name],
             };
         }
