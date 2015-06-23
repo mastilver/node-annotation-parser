@@ -38,6 +38,10 @@ describe('module exposing functions', function(){
                 result.functions.firstFunction.annotations.should.have.property('first');
             });
 
+            it('should have the first rawAnnotation', function(){
+                result.functions.firstFunction.rawAnnotations.should.have.property('first', ['first()']);
+            })
+
             it('should have the function reference', function(){
                 result.functions.firstFunction.ref().should.be.equal('first');
             });
@@ -47,6 +51,10 @@ describe('module exposing functions', function(){
 
             it('should have the second annotation', function(){
                 result.functions.secondFunction.annotations.should.have.property('second');
+            });
+
+            it('should have the second rawAnnotation', function(){
+                result.functions.secondFunction.rawAnnotations.should.have.property('second', ['second()']);
             });
 
             it('should have the function reference', function(){

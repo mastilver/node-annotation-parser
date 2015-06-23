@@ -30,12 +30,24 @@ describe('module exposing an object', function(){
                 result.module.annotations.should.have.property('testModuleMultiline');
             });
 
+            it('should get the first rawAnnotation', function(){
+                result.module.rawAnnotations.should.have.property('testModuleMultiline', ['testModuleMultiline()']);
+            });
+
             it('should get the second annotation', function(){
                 result.module.annotations.should.have.property('testModuleSingleline');
             });
 
+            it('should get the second rawAnnotation', function(){
+                result.module.rawAnnotations.should.have.property('testModuleSingleline', ['testModuleSingleline()']);
+            });
+
             it('should not get the isolated annotation', function(){
                 result.module.annotations.should.not.have.property('Useless');
+            });
+
+            it('should not get the isolated rawAnnotation', function(){
+                result.module.rawAnnotations.should.not.have.property('Useless');
             });
 
             it('should have the module reference', function(){
@@ -57,6 +69,10 @@ describe('module exposing an object', function(){
                 result.functions.functionWithSingleLineAnnotation.annotations.should.have.property('SingleLine');
             });
 
+            it('should get the rawAnnotation', function(){
+                result.functions.functionWithSingleLineAnnotation.rawAnnotations.should.have.property('SingleLine', ['SingleLine()']);
+            });
+
             it('should have the function reference', function(){
                 result.functions.functionWithSingleLineAnnotation.ref().should.be.equal('SingleLine');
             });
@@ -70,6 +86,10 @@ describe('module exposing an object', function(){
 
             it('should get the annotation', function(){
                 result.functions.functionWithMultipleLineAnnotation.annotations.should.have.property('MultipleLine');
+            });
+
+            it('should get the rawAnnotation', function(){
+                result.functions.functionWithMultipleLineAnnotation.rawAnnotations.should.have.property('MultipleLine', ['MultipleLine()']);
             });
 
             it('should have the function reference', function(){
@@ -87,12 +107,24 @@ describe('module exposing an object', function(){
                 result.functions.functionWithALotOfAnnotation.annotations.should.have.property('Test1');
             });
 
+            it('should get the first rawAnnotation', function(){
+                result.functions.functionWithALotOfAnnotation.rawAnnotations.should.have.property('Test1', ['Test1()']);
+            });
+
             it('should get the second annotation', function(){
                 result.functions.functionWithALotOfAnnotation.annotations.should.have.property('Test2');
             });
 
+            it('should get the second rawAnnotation', function(){
+                result.functions.functionWithALotOfAnnotation.rawAnnotations.should.have.property('Test2', ['Test2()']);
+            });
+
             it('should get the third annotation', function(){
                 result.functions.functionWithALotOfAnnotation.annotations.should.have.property('Test3');
+            });
+
+            it('should get the third rawAnnotation', function(){
+                result.functions.functionWithALotOfAnnotation.rawAnnotations.should.have.property('Test3', ['Test3()']);
             });
 
             it('should have the function reference', function(){
@@ -108,6 +140,10 @@ describe('module exposing an object', function(){
 
             it('should have no annotations', function(){
                 result.functions.functionWithoutAnnotation.annotations.should.be.empty;
+            });
+
+            it('should have no rawAnnotations', function(){
+                result.functions.functionWithoutAnnotation.rawAnnotations.should.be.empty;
             });
 
             it('should have the function reference', function(){
@@ -127,6 +163,10 @@ describe('module exposing an object', function(){
                 result.functions.functionAnnotationWithArgument.annotations.Test4.should.have.length(1);
 
                 should.deepEqual(result.functions.functionAnnotationWithArgument.annotations.Test4[0], ['string', 5, {a: 10}]);
+            });
+
+            it('should have functionAnnotationWithArgument rawAnnotations', function(){
+                result.functions.functionAnnotationWithArgument.rawAnnotations.should.have.property('Test4', ['Test4(\'string\', 5, {a: 10})']);
             });
 
             it('should have the function reference', function(){
@@ -160,12 +200,24 @@ describe('module exposing an object', function(){
                 result.module.annotations.should.have.property('testModuleMultiline');
             });
 
+            it('should get the first rawAnnotation', function(){
+                result.module.rawAnnotations.should.have.property('testModuleMultiline', ['testModuleMultiline()']);
+            });
+
             it('should get the second annotation', function(){
                 result.module.annotations.should.have.property('testModuleSingleline');
             });
 
+            it('should get the second rawAnnotation', function(){
+                result.module.rawAnnotations.should.have.property('testModuleSingleline', ['testModuleSingleline()']);
+            });
+
             it('should not get the isolated annotation', function(){
                 result.module.annotations.should.not.have.property('Useless');
+            });
+
+            it('should not get the isolated rawAnnotation', function(){
+                result.module.rawAnnotations.should.not.have.property('Useless');
             });
 
             it('should have the module reference', function(){
@@ -187,6 +239,10 @@ describe('module exposing an object', function(){
                 result.functions.functionWithSingleLineAnnotation.annotations.should.have.property('SingleLine');
             });
 
+            it('should get the rawAnnotation', function(){
+                result.functions.functionWithSingleLineAnnotation.rawAnnotations.should.have.property('SingleLine', ['SingleLine()']);
+            });
+
             it('should have the function reference', function(){
                 result.functions.functionWithSingleLineAnnotation.ref().should.be.equal('SingleLine');
             });
@@ -200,6 +256,10 @@ describe('module exposing an object', function(){
 
             it('should get the annotation', function(){
                 result.functions.functionWithMultipleLineAnnotation.annotations.should.have.property('MultipleLine');
+            });
+
+            it('should get the rawAnnotation', function(){
+                result.functions.functionWithMultipleLineAnnotation.rawAnnotations.should.have.property('MultipleLine', ['MultipleLine()']);
             });
 
             it('should have the function reference', function(){
@@ -217,12 +277,24 @@ describe('module exposing an object', function(){
                 result.functions.functionWithALotOfAnnotation.annotations.should.have.property('Test1');
             });
 
+            it('should get the first rawAnnotation', function(){
+                result.functions.functionWithALotOfAnnotation.rawAnnotations.should.have.property('Test1', ['Test1()']);
+            });
+
             it('should get the second annotation', function(){
                 result.functions.functionWithALotOfAnnotation.annotations.should.have.property('Test2');
             });
 
+            it('should get the second rawAnnotation', function(){
+                result.functions.functionWithALotOfAnnotation.rawAnnotations.should.have.property('Test2', ['Test2()']);
+            });
+
             it('should get the third annotation', function(){
                 result.functions.functionWithALotOfAnnotation.annotations.should.have.property('Test3');
+            });
+
+            it('should get the third rawAnnotation', function(){
+                result.functions.functionWithALotOfAnnotation.rawAnnotations.should.have.property('Test3', ['Test3()']);
             });
 
             it('should have the function reference', function(){
@@ -238,6 +310,10 @@ describe('module exposing an object', function(){
 
             it('should have no annotations', function(){
                 result.functions.functionWithoutAnnotation.annotations.should.be.empty;
+            });
+
+            it('should have no rawAnnotations', function(){
+                result.functions.functionWithoutAnnotation.rawAnnotations.should.be.empty;
             });
 
             it('should have the function reference', function(){
@@ -257,6 +333,10 @@ describe('module exposing an object', function(){
                 result.functions.functionAnnotationWithArgument.annotations.Test4.should.have.length(1);
 
                 should.deepEqual(result.functions.functionAnnotationWithArgument.annotations.Test4[0], ['string', 5, {a: 10}]);
+            });
+
+            it('should have functionAnnotationWithArgument rawAnnotations', function(){
+                result.functions.functionAnnotationWithArgument.rawAnnotations.should.have.property('Test4', ['Test4(\'string\', 5, {a: 10})']);
             });
 
             it('should have the function reference', function(){

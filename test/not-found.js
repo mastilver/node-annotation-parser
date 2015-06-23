@@ -5,7 +5,7 @@ var annotationModule = require('../index.js');
 var mockPath = './fixtures/notfound.js';
 
 
-describe('module could no tbe found', function(){
+describe('module could not be found', function(){
 
     describe('asynchronous', function() {
 

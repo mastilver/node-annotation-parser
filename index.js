@@ -40,7 +40,8 @@ function getAnnotationFromFile(absolutePath, filePath, fileContent){
 
     var moduleToLoad = require(absolutePath);
 
-    result.module.annotations = getAnnotation(fileContent, 'module');
+    result.module.rawAnnotations = getRawAnnotations(fileContent, 'module');
+    result.module.annotations = parseAnnotations(result.module.rawAnnotations);
     result.module.ref = moduleToLoad;
     result.module.name = path.basename(filePath, path.extname(filePath));
 
@@ -50,17 +51,19 @@ function getAnnotationFromFile(absolutePath, filePath, fileContent){
         if(moduleToLoad[name] instanceof Function){
 
             result.functions[name] = {
-                annotations: getAnnotation(fileContent, 'function', name),
+                rawAnnotations: getRawAnnotations(fileContent, 'function', name),
                 ref: moduleToLoad[name],
             };
+
+            result.functions[name].annotations = parseAnnotations(result.functions[name].rawAnnotations);
         }
     }
 
     return result;
 }
 
-function getAnnotation(fileContent, type, name){
 
+function getRawAnnotations(fileContent, type, name){
     suffixes = ({
         function: [name + '\\s*:\\s*function\\(', '(module\\.)?exports\\.' + name + '\\s*=\\s*'],
         module: ['module\\.exports\\s*=\\s*{']
@@ -77,7 +80,7 @@ function getAnnotation(fileContent, type, name){
     var match = matches[0];
 
 
-    var annotationRegex = /@([a-zA-Z_][a-zA-Z0-9]*)\((.*)\)/g;
+    var annotationRegex = /@(([a-zA-Z_][a-zA-Z0-9]*)\(.*\))/g;
     var annotationMatches;
 
     var result = {};
@@ -85,19 +88,33 @@ function getAnnotation(fileContent, type, name){
 
     while(annotationMatches = annotationRegex.exec(match)){
 
-        var functionName = annotationMatches[1];
-        var argumentsString = annotationMatches[2];
+        var key = annotationMatches[2];
+        var value = annotationMatches[1];
 
-        if(!result[functionName]){
-            result[functionName] = [];
-        }
-
-
-        if(argumentsString.length > 0){
-            result[functionName].push(eval('([' + argumentsString + '])'));
+        if(key in result){
+            result.push(value);
         }
         else{
-            result[functionName].push([]);
+            result[key] = [value];
+        }
+    }
+
+    return result;
+}
+
+function parseAnnotations(rawAnnotations){
+
+    var annotationRegex = /([a-zA-Z_][a-zA-Z0-9]*)\((.*)\)/;
+
+    var result = {};
+
+    for(var i in rawAnnotations){
+
+        result[i] = [];
+
+        for(var j in rawAnnotations[i]){
+            var argumentsString = annotationRegex.exec(rawAnnotations[i][j])[2];
+            result[i].push(eval('([' + argumentsString + '])'));
         }
     }
 
