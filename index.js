@@ -14,7 +14,11 @@ module.exports = function getAllAnnotations(filePath, callback){
 
         if(err) return callback(err);
 
-        var result = getAnnotationFromFile(absolutePath, filePath, fileContent);
+        try {
+            var result = getAnnotationFromFile(absolutePath, filePath, fileContent);
+        } catch (e) {
+            callback(e);
+        }
 
         callback(null, result);
     });
@@ -92,7 +96,7 @@ function getRawAnnotations(fileContent, type, name){
         var value = annotationMatches[1];
 
         if(key in result){
-            result.push(value);
+            result[key].push(value);
         }
         else{
             result[key] = [value];
