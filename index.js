@@ -73,7 +73,7 @@ function getRawAnnotations(fileContent, type, name){
         module: ['module\\.exports\\s*=\\s*{']
     })[type];
 
-    var regex = new RegExp('((\\/\\/.*)|(\\/\\*[\\S\\s]*\\*\\/)|\\s)*(' + suffixes.join('|') + ')');
+    var regex = new RegExp('((\\/\\/.*)|(\\/\\*(?:[\\s\\S](?!\\*\\/))*?\\s*\\*\\/)|\\s)*(' + suffixes.join('|') + ')');
 
     var matches = regex.exec(fileContent);
 
