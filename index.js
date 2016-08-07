@@ -70,7 +70,7 @@ function getAnnotationFromFile(absolutePath, filePath, fileContent){
 function getRawAnnotations(fileContent, type, name){
     suffixes = ({
         function: [name + '\\s*:\\s*function\\(', '(module\\.)?exports\\.' + name + '\\s*=\\s*'],
-        module: ['module\\.exports\\s*=\\s*{']
+        module: ['module\\.exports\\s*=\\s*(:?function\\([\\S\\s]*?\\))?\\s*{']
     })[type];
 
     var regex = new RegExp('((\\/\\/.*)|(\\/\\*(?:[\\s\\S](?!\\*\\/))*?\\s*\\*\\/)|\\s)*(' + suffixes.join('|') + ')');
