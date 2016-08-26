@@ -92,6 +92,13 @@ My first goal was to create an [MVC](https://aspnetwebstack.codeplex.com/wikipag
 There is already an [annotation parser](https://www.npmjs.com/package/annotation) for node but it didn't suit my needs.
 
 
+### Contributing
+
+When submiting your pull-request try to follow those guides:
+- https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github
+- https://medium.com/@vadimdemedes/making-your-first-contribution-de6576ddb190
+
+
 ### Licence
 
 MIT © Thomas Sileghem
