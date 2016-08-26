@@ -92,6 +92,14 @@ describe('module exposing an object', function(){
                 result.functions.functionWithMultipleLineAnnotation.rawAnnotations.should.have.property('MultipleLine', ['MultipleLine()']);
             });
 
+            it('should not get the module annotation', function(){
+                result.functions.functionWithMultipleLineAnnotation.annotations.should.not.have.property('testModuleMultiline');
+            });
+
+            it('should not get the module rawannotation', function(){
+                result.functions.functionWithMultipleLineAnnotation.rawAnnotations.should.not.have.property('testModuleMultiline', ['testModuleMultiline()']);
+            });
+
             it('should have the function reference', function(){
                 result.functions.functionWithMultipleLineAnnotation.ref().should.be.equal('MultipleLine');
             });
@@ -126,6 +134,24 @@ describe('module exposing an object', function(){
             it('should get the third rawAnnotation', function(){
                 result.functions.functionWithALotOfAnnotation.rawAnnotations.should.have.property('Test3', ['Test3()']);
             });
+
+            it('should not get the module annotation', function(){
+                result.functions.functionWithALotOfAnnotation.annotations.should.not.have.property('testModuleMultiline');
+            });
+
+            it('should not get the module rawannotation', function(){
+                result.functions.functionWithALotOfAnnotation.rawAnnotations.should.not.have.property('testModuleMultiline', ['testModuleMultiline()']);
+            });
+
+            it('should not get the functionWithMultipleLineAnnotation annotation', function(){
+                result.functions.functionWithALotOfAnnotation.annotations.should.not.have.property('MultipleLine');
+            });
+
+            it('should not get the functionWithMultipleLineAnnotation rawannotation', function(){
+                result.functions.functionWithALotOfAnnotation.rawAnnotations.should.not.have.property('MultipleLine', ['MultipleLine()']);
+            });
+
+
 
             it('should have the function reference', function(){
                 result.functions.functionWithALotOfAnnotation.ref().should.be.equal('ALot');
@@ -262,6 +288,14 @@ describe('module exposing an object', function(){
                 result.functions.functionWithMultipleLineAnnotation.rawAnnotations.should.have.property('MultipleLine', ['MultipleLine()']);
             });
 
+            it('should not get the module annotation', function(){
+                result.functions.functionWithMultipleLineAnnotation.annotations.should.not.have.property('testModuleMultiline');
+            });
+
+            it('should not get the module rawannotation', function(){
+                result.functions.functionWithMultipleLineAnnotation.rawAnnotations.should.not.have.property('testModuleMultiline', ['testModuleMultiline()']);
+            });
+
             it('should have the function reference', function(){
                 result.functions.functionWithMultipleLineAnnotation.ref().should.be.equal('MultipleLine');
             });
@@ -295,6 +329,22 @@ describe('module exposing an object', function(){
 
             it('should get the third rawAnnotation', function(){
                 result.functions.functionWithALotOfAnnotation.rawAnnotations.should.have.property('Test3', ['Test3()']);
+            });
+
+            it('should not get the module annotation', function(){
+                result.functions.functionWithALotOfAnnotation.annotations.should.not.have.property('testModuleMultiline');
+            });
+
+            it('should not get the module rawannotation', function(){
+                result.functions.functionWithALotOfAnnotation.rawAnnotations.should.not.have.property('testModuleMultiline', ['testModuleMultiline()']);
+            });
+
+            it('should not get the functionWithMultipleLineAnnotation annotation', function(){
+                result.functions.functionWithALotOfAnnotation.annotations.should.not.have.property('MultipleLine');
+            });
+
+            it('should not get the functionWithMultipleLineAnnotation rawannotation', function(){
+                result.functions.functionWithALotOfAnnotation.rawAnnotations.should.not.have.property('MultipleLine', ['MultipleLine()']);
             });
 
             it('should have the function reference', function(){
