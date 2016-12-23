@@ -22,9 +22,9 @@
   "homepage": "https://github.com/mastilver/node-annotation-parser",
   "devDependencies": {
     "coveralls": "^2.11.2",
-    "mocha": "^2.1.0",
-    "nyc": "^2.2.1",
-    "should": "^4.6.1"
+    "mocha": "^3.2.0",
+    "nyc": "^10.0.0",
+    "should": "^11.1.2"
   },
   "dependencies": {
     "caller": "^1.0.0"
